@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { CaseStudyCard } from "@/components/case-study-card";
 import { Container } from "@/components/container";
 import { DraftBadge } from "@/components/draft-badge";
@@ -54,6 +56,13 @@ export default function WorkPage() {
                     </span>
                   ))}
                 </div>
+                <Link
+                  href={`/work/${featured.slug}`}
+                  className="mt-8 inline-flex items-center gap-1 self-start text-sm font-semibold text-lime hover:underline"
+                >
+                  Read the {featured.name} case study
+                  <ArrowUpRight className="size-4" aria-hidden="true" />
+                </Link>
               </div>
               <div className="relative hidden items-end justify-center bg-[#0c0c0c] px-8 pt-10 pb-0 md:flex md:px-12">
                 <div

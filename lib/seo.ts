@@ -104,6 +104,38 @@ export function faqSchema() {
   };
 }
 
+/**
+ * Article schema for a case study.
+ *
+ * `image` is deliberately absent. Article rich results want one, but the only
+ * images we hold per study are small client logos, and attaching the generic
+ * brand card to all four would describe none of them. Add it here once the
+ * per-study video stills in CONTENT_TODO.md land — that is what unlocks the
+ * rich result.
+ */
+export function caseStudySchema(study: {
+  slug: string;
+  name: string;
+  totalViews: string;
+  summary: string;
+}) {
+  const url = absoluteUrl(`/work/${study.slug}`);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}#article`,
+    headline: `How ${study.name} reached ${study.totalViews} TikTok views`,
+    description: study.summary,
+    mainEntityOfPage: url,
+    isPartOf: { "@id": WEBSITE_ID },
+    author: { "@id": ORGANIZATION_ID },
+    publisher: { "@id": ORGANIZATION_ID },
+    about: { "@type": "Organization", name: study.name },
+    inLanguage: "en",
+  };
+}
+
 export function breadcrumbSchema(
   trail: ReadonlyArray<{ name: string; path: string }>,
 ) {

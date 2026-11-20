@@ -80,14 +80,27 @@ schema blocks, and GSC shows 8 URLs submitted.
 
 ### 2a. Case study pages — the single biggest win
 
-- [ ] **`[code]` Delete the `/work/:slug` → `/work` redirect** in `next.config.ts`
-      and build real detail pages. Every field they need already exists in
-      `content/caseStudies.ts`.
+- [x] **`[code]` Deleted the `/work/:slug` → `/work` redirect** and built real
+      detail pages at `/work/[slug]`, rendering every field that already
+      existed in `content/caseStudies.ts`.
+- [x] **`[code]` Draft gate.** A study whose copy still contains `TODO:` is
+      `noindex, follow` and is kept out of the sitemap. The gate reads the
+      content itself, so stripping the TODO prefixes publishes the page with no
+      code change. **All four are currently gated.**
+- [x] **`[code]` Fixed a soft 404.** Unknown slugs returned HTTP 200 with
+      "This page could not be found" on first request — partial prefetching
+      serves the fallback before `notFound()` runs — and only 404'd on later
+      cached hits. `ensureStatic: "navigation"` makes the first request wait
+      for the full render. (`dynamicParams: false`, the usual answer, fails the
+      build under Cache Components.)
 - [ ] **`[content]` Confirm the narrative copy with clients.** Blocked on
       `CONTENT_TODO.md`: one-liner, challenge, what we did, formats and posting
       strategy for Glowup, RAYZ, Shoppin and Chef AI. **This is the critical path
       — the engineering is a day, the sign-off is the bottleneck.**
-- [ ] **`[code]` `CaseStudy`/`Article` + `BreadcrumbList` schema** per page.
+- [x] **`[code]` `Article` + `BreadcrumbList` schema** per page. `image` is
+      deliberately omitted — the only per-study images we hold are small client
+      logos, and attaching the generic brand card to all four would describe
+      none of them. The video stills below are what unlock the rich result.
 - [ ] **`[content]` Video embeds or stills.** Four top videos per study, also
       tracked in `CONTENT_TODO.md`.
 
@@ -108,9 +121,14 @@ the service pages used.
 
 ### 2c. Internal linking
 
-- [ ] **`[code]` Related links on every page.** Case study → services used →
-      other case studies in the vertical. We run 7 internal links; Agniverse runs
-      ~80 from a single page.
+- [x] **`[code]` Case studies are linked from everywhere they should be** —
+      the `/work` index, the featured card, and the homepage results grid, and
+      each study cross-links to the other three. The site now links 12 unique
+      internal URLs, up from 8.
+- [ ] **`[content]` Map services to case studies.** Each study should link to
+      the services it actually used — the strongest internal link we are still
+      missing. There is no such mapping in the data and inventing one would be
+      fabrication, so it needs a line per study from someone who ran the work.
 
 ---
 

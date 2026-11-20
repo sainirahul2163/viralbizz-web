@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/container";
 import { Reveal } from "@/components/reveal";
 import { caseStudies } from "@/content/caseStudies";
@@ -19,7 +20,11 @@ export function HomeResults() {
         <div className="mt-12 grid gap-5 sm:grid-cols-2">
           {caseStudies.map((study, i) => (
             <Reveal key={study.slug} delay={i * 0.05}>
-              <article className="h-full rounded-2xl border border-border bg-card p-6">
+              <Link
+                href={`/work/${study.slug}`}
+                aria-label={`${study.name} case study — ${study.totalViews} TikTok views`}
+                className="block h-full rounded-2xl border border-border bg-card p-6 transition motion-safe:hover:-translate-y-1 hover:border-lime/40"
+              >
                 <div className="inline-flex rounded-lg bg-white px-2.5 py-1.5">
                   <Image
                     src={study.logo}
@@ -29,17 +34,17 @@ export function HomeResults() {
                     className="h-7 w-auto object-contain"
                   />
                 </div>
-                <p className="mt-6 font-display text-5xl font-extrabold tracking-tight text-lime">
+                <span className="mt-6 block font-display text-5xl font-extrabold tracking-tight text-lime">
                   {study.totalViews}
-                </p>
+                </span>
                 <h3 className="mt-3 text-xl font-bold">{study.name}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <span className="mt-1 block text-sm text-muted-foreground">
                   Total TikTok views generated
                   {study.avgEngagementRate
                     ? ` · ${study.avgEngagementRate} avg. engagement`
                     : ""}
-                </p>
-              </article>
+                </span>
+              </Link>
             </Reveal>
           ))}
         </div>

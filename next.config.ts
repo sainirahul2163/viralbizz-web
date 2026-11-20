@@ -8,15 +8,11 @@ const nextConfig: NextConfig = {
     // build (every Vercel deployment) exits 1 on an open advisory.
     agentUpgrade: "security",
   },
-  async redirects() {
-    return [
-      {
-        source: "/work/:slug",
-        destination: "/work",
-        permanent: true,
-      },
-    ];
-  },
+  // There was a permanent /work/:slug -> /work redirect here. It threw away
+  // the site's strongest SEO asset: four case studies with real numbers, whose
+  // full narrative already exists in content/caseStudies.ts. Detail pages now
+  // live at /work/[slug]; ones whose copy is still unconfirmed are noindex and
+  // kept out of the sitemap rather than redirected away.
   images: {
     formats: ["image/avif", "image/webp"],
   },

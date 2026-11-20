@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { CaseStudy } from "@/content/types";
 import { cn } from "@/lib/utils";
 
@@ -10,9 +11,11 @@ export function CaseStudyCard({
   className?: string;
 }) {
   return (
-    <article
+    <Link
+      href={`/work/${study.slug}`}
+      aria-label={`${study.name} case study — ${study.totalViews} TikTok views`}
       className={cn(
-        "flex h-full flex-col rounded-2xl border border-border bg-card p-6",
+        "flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition motion-safe:hover:-translate-y-1 hover:border-lime/40",
         className,
       )}
     >
@@ -25,13 +28,13 @@ export function CaseStudyCard({
           className="h-7 w-auto object-contain"
         />
       </div>
-      <p className="mt-6 font-display text-5xl font-extrabold tracking-tight text-lime">
+      <span className="mt-6 block font-display text-5xl font-extrabold tracking-tight text-lime">
         {study.totalViews}
-      </p>
+      </span>
       <h2 className="mt-3 text-xl font-bold">{study.name}</h2>
-      <p className="mt-1 text-sm text-muted-foreground">
+      <span className="mt-1 block text-sm text-muted-foreground">
         Total TikTok views generated
-      </p>
+      </span>
       <div className="mt-4 flex flex-wrap gap-2">
         {study.topVideos.map((views) => (
           <span
@@ -47,6 +50,6 @@ export function CaseStudyCard({
           </span>
         ) : null}
       </div>
-    </article>
+    </Link>
   );
 }
