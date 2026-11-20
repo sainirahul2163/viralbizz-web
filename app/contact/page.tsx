@@ -8,6 +8,7 @@ export const metadata = {
   title: "Contact",
   description:
     "Tell us about the app. We’ll come back with a free strategy call or a custom proposal.",
+  alternates: { canonical: "/contact" },
 };
 
 const promises = [

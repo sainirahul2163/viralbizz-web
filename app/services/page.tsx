@@ -11,6 +11,7 @@ import { siteConfig } from "@/site.config";
 export const metadata = {
   title: "Services",
   description: siteConfig.servicesIntro,
+  alternates: { canonical: "/services" },
 };
 
 const fit = [

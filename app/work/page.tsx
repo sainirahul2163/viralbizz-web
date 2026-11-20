@@ -12,6 +12,7 @@ import { siteConfig } from "@/site.config";
 export const metadata = {
   title: "Work",
   description: siteConfig.resultsHeadline,
+  alternates: { canonical: "/work" },
 };
 
 export default function WorkPage() {
