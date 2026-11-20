@@ -48,11 +48,20 @@ schema blocks, and GSC shows 8 URLs submitted.
 
 ## Phase 1 — Stop discarding the proof we already have (week 1–2)
 
-- [ ] **`[code]` Put the person's name back on testimonials.** We hold
-      "Louis-David Paul-Hus" and "Shlok" plus both headshots and render neither.
-      Add the photo, name, role, company.
-- [ ] **`[code]` `Review` / `Organization` schema** for those two testimonials
-      once they carry names.
+- [x] **`[code]` Put the person's name back on testimonials.** Name, role,
+      company, client logo and a face. Both source photos are casual full-length
+      snapshots, not headshots, so the avatar crops to a measured region of each
+      image rather than relying on `object-position` — see `photoCrop` in
+      `content/types.ts`. **Proper headshots would be a genuine upgrade here**
+      and would let that whole mechanism be deleted.
+- [ ] ~~**`Review` / `Organization` schema** for those testimonials~~ —
+      **dropped, this was bad advice.** Google has excluded self-serving reviews
+      (an Organization carrying reviews of itself on its own site) from review
+      rich results since September 2019, so it earns no stars, and self-serving
+      or fabricated review markup can attract a manual action. Displaying
+      testimonials as ordinary HTML — which is what we now do — is explicitly
+      fine. Review markup only becomes available if we ever mark up a distinct
+      product, not the agency itself.
 - [ ] **`[content]` Un-ship the draft copy.** The DRAFT badge is live on `/work`
       and "TODO: confirm with legal" renders on `/privacy` and `/terms`. Thin,
       visibly-unfinished legal pages are a quality signal working against us.

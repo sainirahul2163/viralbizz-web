@@ -9,6 +9,8 @@ export const testimonials: Testimonial[] = [
     role: "Founder",
     company: "Glowup",
     photo: "/images/testimonials/louis-david-paul-hus.webp",
+    // Street photo; face sits upper-right of frame.
+    photoCrop: { naturalWidth: 800, naturalHeight: 900, x: 339, y: 70, size: 300 },
     logo: "/images/clients/glowup.webp",
     caseStudySlug: "glowup",
   },
@@ -20,6 +22,8 @@ export const testimonials: Testimonial[] = [
     role: "Founder",
     company: "Shoppin",
     photo: "/images/testimonials/shlok.webp",
+    // Full-length photo; face sits near the top of frame.
+    photoCrop: { naturalWidth: 433, naturalHeight: 655, x: 130, y: 10, size: 200 },
     logo: "/images/clients/shoppin.webp",
     caseStudySlug: "shoppin",
   },

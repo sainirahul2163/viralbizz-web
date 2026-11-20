@@ -1,7 +1,48 @@
 import Image from "next/image";
 import { Container } from "@/components/container";
 import { Reveal } from "@/components/reveal";
+import type { Testimonial } from "@/content/types";
 import { testimonials } from "@/content/testimonials";
+
+/**
+ * Square avatar cropped to an arbitrary region of the source image.
+ *
+ * The image is blown up inside a clipping circle and offset, rather than
+ * relying on object-position — see the note on `photoCrop` in content/types.ts
+ * for why that does not work for these particular photos. Every value is a
+ * percentage of the circle, so the crop holds at any avatar size.
+ */
+function Avatar({
+  src,
+  name,
+  crop,
+}: {
+  src: string;
+  name: string;
+  crop: Testimonial["photoCrop"];
+}) {
+  const { naturalWidth, naturalHeight, x, y, size } = crop;
+
+  return (
+    <div className="relative size-11 shrink-0 overflow-hidden rounded-full bg-muted ring-1 ring-border">
+      <Image
+        src={src}
+        alt={name}
+        width={naturalWidth}
+        height={naturalHeight}
+        sizes="96px"
+        className="absolute"
+        style={{
+          width: `${(naturalWidth / size) * 100}%`,
+          height: `${(naturalHeight / size) * 100}%`,
+          left: `${(-x / size) * 100}%`,
+          top: `${(-y / size) * 100}%`,
+          maxWidth: "none",
+        }}
+      />
+    </div>
+  );
+}
 
 export function HomeTestimonials() {
   return (
@@ -23,7 +64,15 @@ export function HomeTestimonials() {
                   “{item.quote}”
                 </blockquote>
                 <figcaption className="mt-8 flex items-center gap-4">
+                  <Avatar
+                    src={item.photo}
+                    name={item.name}
+                    crop={item.photoCrop}
+                  />
                   <div className="min-w-0 flex-1">
+                    <p className="text-sm font-semibold text-foreground">
+                      {item.name}
+                    </p>
                     <p className="text-sm text-muted-foreground">
                       {item.role}, {item.company}
                     </p>
@@ -31,6 +80,7 @@ export function HomeTestimonials() {
                   <div className="rounded-lg bg-white px-2 py-1">
                     <Image
                       src={item.logo}
+                      // Decorative: the company name is in the text beside it.
                       alt=""
                       width={96}
                       height={32}
