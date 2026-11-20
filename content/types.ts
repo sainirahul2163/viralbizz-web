@@ -90,6 +90,32 @@ export type Faq = {
   answer: string;
 };
 
+export type ArticleSection = {
+  /**
+   * Written as the question a reader would actually type. Competitors in this
+   * niche win long-tail search with question-shaped H2s rather than noun
+   * labels, and it is also what makes a section quotable by an assistant.
+   */
+  heading: string;
+  body: string[];
+  bullets?: string[];
+};
+
+export type Article = {
+  slug: string;
+  /** Used for <title>, the H1 and the Article headline. */
+  title: string;
+  description: string;
+  /** Standfirst under the H1. Also the schema description. */
+  summary: string;
+  /** ISO date. Drives `dateModified`, not a "posted on" byline. */
+  updated: string;
+  sections: ArticleSection[];
+  faqs?: Faq[];
+  /** Slugs of case studies that evidence this article's claims. */
+  relatedCaseStudies?: string[];
+};
+
 export type ProcessStep = {
   step: number;
   title: string;

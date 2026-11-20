@@ -43,6 +43,10 @@ export const siteConfig = {
     { href: "/work", label: "Work" },
     { href: "/services", label: "Services" },
     { href: "/about", label: "About" },
+    // Footer only for now. It belongs in the main nav once there are a few
+    // published guides — a top-level item leading to one draft is worse than
+    // no item at all.
+    { href: "/learn", label: "Learn" },
     { href: "/faq", label: "FAQ" },
     { href: "/contact", label: "Contact" },
     { href: "/privacy", label: "Privacy" },

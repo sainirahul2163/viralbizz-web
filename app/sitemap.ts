@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
+import { articles } from "@/content/articles";
 import { caseStudies } from "@/content/caseStudies";
-import { isDraftCaseStudy } from "@/lib/draft";
+import { isDraftArticle, isDraftCaseStudy } from "@/lib/draft";
 import { absoluteUrl, routes } from "@/lib/seo";
 
 /**
@@ -33,5 +34,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     }));
 
-  return [...staticRoutes, ...published];
+  // Same gate for guides. The /learn hub only earns a sitemap entry once there
+  // is something published on it — until then it is a thin page and is
+  // noindex to match.
+  const publishedArticles = articles.filter(
+    (article) => !isDraftArticle(article),
+  );
+
+  const guides = publishedArticles.length
+    ? [
+        {
+          url: absoluteUrl("/learn"),
+          lastModified: CONTENT_UPDATED,
+          changeFrequency: "weekly" as const,
+          priority: 0.7,
+        },
+        ...publishedArticles.map((article) => ({
+          url: absoluteUrl(`/learn/${article.slug}`),
+          lastModified: new Date(article.updated),
+          changeFrequency: "monthly" as const,
+          priority: 0.7,
+        })),
+      ]
+    : [];
+
+  return [...staticRoutes, ...published, ...guides];
 }

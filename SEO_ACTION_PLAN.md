@@ -134,18 +134,32 @@ the service pages used.
 
 ## Phase 3 — Content that wins long-tail (month 2–3)
 
-Only start this if someone owns publishing. Four abandoned posts are worse than
-none.
+The structure is built: a `/learn` guide library with `/learn/[slug]` pages,
+`Article` + `FAQPage` + `BreadcrumbList` schema, and the same draft gate the
+case studies use — a guide containing `TODO:` anywhere is noindex and kept out
+of the sitemap, and so is the hub while nothing on it is published.
+
+Deliberately a **guide library, not a blog**. The risk flagged in the research
+was an abandoned blog with four posts from 2026, which is worse than no blog.
+Guides carry no implied cadence — one that is still accurate is still current —
+so the shape removes the failure mode instead of relying on a schedule.
+
+Each guide below needs ViralBizz's actual expertise in it. The research and
+structure can be done for you; the opinions cannot.
 
 Each of these is evidenced — lifted from a competitor's H2s, FAQ or slugs, so we
 know someone already judged the query worth targeting. Write one properly before
 writing six badly.
 
-- [ ] **`[content]` "What an organic TikTok agency actually costs for an app"** —
-      research found *no* published rate for organic-only app work. We don't have
-      to publish our prices to own the question; explain what drives cost
-      (posting volume, account count, formats, localisation) and send the buyer
-      to a call. Genuine gap, directly on-positioning.
+- [~] **`[content]` "What does an organic TikTok agency cost for an app?"** —
+      **drafted** at `/learn/organic-tiktok-agency-cost-for-apps`, ~1,200 words.
+      Five sections are written and sourced: why nobody publishes a price, the
+      public ranges with their caveats, the five cost drivers, what you are
+      actually buying, and what to ask before signing. Four FAQs.
+      **One section blocks it** — "How ViralBizz prices this" is a `TODO`,
+      because typical engagement shape, minimum commitment and what's included
+      have to come from the team, not from a competitor's blog. Fill that in
+      and the page publishes itself.
 - [ ] **`[content]` "How many TikTok posts a month does an app actually need?"**
 - [ ] **`[content]` "How to measure organic TikTok installs"** — attribution here
       is genuinely hard and the existing answers are weak. Strongest expertise

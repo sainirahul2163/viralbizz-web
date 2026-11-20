@@ -3,6 +3,7 @@ export * from "./stats";
 export * from "./clients";
 export * from "./services";
 export * from "./caseStudies";
+export * from "./articles";
 export * from "./testimonials";
 export * from "./team";
 export * from "./faqs";

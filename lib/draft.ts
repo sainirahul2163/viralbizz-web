@@ -1,4 +1,4 @@
-import type { CaseStudy } from "@/content/types";
+import type { Article, CaseStudy } from "@/content/types";
 
 export function draftCopy(text: string) {
   const isDraft = /^\s*TODO:/i.test(text);
@@ -26,5 +26,23 @@ export function isDraftCaseStudy(study: CaseStudy) {
     study.whatWeDid,
     study.postingStrategy,
     ...study.formats,
+  ].some((text) => draftCopy(text).isDraft);
+}
+
+/**
+ * Same gate for guides. A guide is draft while any paragraph, bullet or
+ * heading still carries a `TODO:` — which is how a half-written page is kept
+ * out of the index without anyone having to remember a flag.
+ */
+export function isDraftArticle(article: Article) {
+  return [
+    article.title,
+    article.summary,
+    ...article.sections.flatMap((section) => [
+      section.heading,
+      ...section.body,
+      ...(section.bullets ?? []),
+    ]),
+    ...(article.faqs ?? []).flatMap((faq) => [faq.question, faq.answer]),
   ].some((text) => draftCopy(text).isDraft);
 }

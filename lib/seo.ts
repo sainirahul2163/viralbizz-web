@@ -136,6 +136,56 @@ export function caseStudySchema(study: {
   };
 }
 
+/**
+ * Article schema for a guide.
+ *
+ * `datePublished` is absent on purpose — these are evergreen guides, not
+ * dated posts, and we have no real publication date to state. `dateModified`
+ * comes from the `updated` field, which is a fact we do hold.
+ */
+export function articleSchema(article: {
+  slug: string;
+  title: string;
+  summary: string;
+  updated: string;
+}) {
+  const url = absoluteUrl(`/learn/${article.slug}`);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}#article`,
+    headline: article.title,
+    description: article.summary,
+    mainEntityOfPage: url,
+    isPartOf: { "@id": WEBSITE_ID },
+    author: { "@id": ORGANIZATION_ID },
+    publisher: { "@id": ORGANIZATION_ID },
+    dateModified: article.updated,
+    inLanguage: "en",
+  };
+}
+
+/** FAQPage for a guide's own Q&A block, scoped to that URL. */
+export function articleFaqSchema(
+  slug: string,
+  faqs: ReadonlyArray<{ question: string; answer: string }>,
+) {
+  const url = absoluteUrl(`/learn/${slug}`);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${url}#faq`,
+    isPartOf: { "@id": WEBSITE_ID },
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+}
+
 export function breadcrumbSchema(
   trail: ReadonlyArray<{ name: string; path: string }>,
 ) {
